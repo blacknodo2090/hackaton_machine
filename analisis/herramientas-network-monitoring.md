@@ -1,6 +1,6 @@
 # 15 monitores de red de consola
 
-Fuente de partida: topic https://github.com/topics/network-monitoring (páginas 1, 2 y 3; el botón "Cargar más" no expone URL propia). Criterio: (1) interfaz de consola (TUI o CLI) con salida legible como texto; (2) funciones variadas, no utilidades de una línea; (3) ámbitos distintos (procesos/host, ancho de banda, latencia, descubrimiento LAN, flujos y forense de paquetes, IDS, pruebas de conectividad). Se descartan herramientas web, GUI de escritorio y librerías sin interfaz propia. Las filas marcadas "adyacente al topic" no aparecen en las páginas revisadas del topic.
+no expone URL propia). Criterio: (1) interfaz de consola (TUI o CLI) con salida legible como texto; (2) funciones variadas, no utilidades de una línea; (3) ámbitos distintos (procesos/host, ancho de banda, latencia, descubrimiento LAN, flujos y forense de paquetes, IDS, pruebas de conectividad). Se descartan herramientas web, GUI de escritorio y librerías sin interfaz propia. Las filas marcadas "adyacente al topic" no aparecen en las páginas revisadas del topic.
 
 Verificación: los datos proceden de las páginas de cada repo (README) y de su extracción; no se ejecutó ninguna herramienta. Lo no confirmado va marcado con [NV].
 
