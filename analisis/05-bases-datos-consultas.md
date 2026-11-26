@@ -32,6 +32,8 @@
 | ldapsearch | Consultas LDAP, bind anónimo, rootDSE | Windows: no nativo (alternativa: PowerShell con `System.DirectoryServices` o `ldp.exe` de RSAT, no verificado). Kali/WSL: sí (`ldap-utils`) |
 | PowerShell (`Invoke-WebRequest`, `Resolve-DnsName`) | Alternativa nativa para peticiones HTTP y consultas DNS | Windows: sí |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Discovery (Databases).
+
 ## Procedimiento paso a paso
 
 1. **Línea base de la interfaz.** Guarda la respuesta normal y la de un valor inválido. Compara código HTTP, longitud y contenido.

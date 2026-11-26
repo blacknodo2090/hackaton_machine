@@ -34,6 +34,8 @@
 | `searchsploit` (exploitdb) | Buscar exploits públicos por producto y versión, offline. | Kali/WSL. |
 | `braa` | Fuerza bruta de OIDs SNMP cuando ya hay comunidad (según HackTricks, no verificado en esta sesión). | Kali/WSL. |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Reconnaissance · Discovery.
+
 ## Procedimiento paso a paso
 
 1. **Confirmar el alcance.** Leer `ctf/SCOPE.md` y anotar qué IP y puertos están autorizados.

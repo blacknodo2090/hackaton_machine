@@ -28,6 +28,8 @@ Convención: **[V]** = comprobado en la fuente indicada durante la investigació
 | Wayback Machine | Versiones antiguas de páginas, rutas y archivos eliminados | Navegador o API [NP] |
 | OSINT Framework | Directorio para elegir recursos por tipo de dato | Navegador [V: sitio y leyenda T/D/R/M] |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Reconnaissance.
+
 ## Procedimiento paso a paso
 
 1. **Registro del dominio (whois / RDAP).** Qué hace: obtiene titular, fechas de alta y caducidad, y servidores de nombres.

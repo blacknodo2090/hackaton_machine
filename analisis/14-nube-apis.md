@@ -34,6 +34,8 @@
 | `jq` | Procesar JSON de Swagger, respuestas de ffuf y GraphQL | Windows: binario [NV]. Kali: nativo |
 | Navegador + Burp/ZAP | Inspeccionar llamadas a la API, modificar cabeceras y cuerpos | Ambos [NV] |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Discovery · Command and Control.
+
 ## Procedimiento paso a paso
 
 **Paso 1. Identificar el proveedor y los hosts de la superficie.**

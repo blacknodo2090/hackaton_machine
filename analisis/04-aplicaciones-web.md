@@ -27,6 +27,8 @@
 | sqlmap (complemento) | Automatiza SQLi tras confirmarla manualmente. No verificado en esta investigación. | Windows: Python. Kali: nativo. |
 | jwt_tool / hashcat (complemento) | Manipulación y crackeo de JWT. Verificado: `hashcat -m 16500` para JWT HS256. [Fuente](https://portswigger.net/web-security/jwt) | Windows: hashcat nativo. Kali: nativo. |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Reconnaissance (Web) · Initial Access.
+
 ## Procedimiento paso a paso
 
 Comandos en bash (Kali/WSL). Sustituir `TARGET`, `WORDLIST` y otros marcadores.

@@ -32,6 +32,8 @@
 | BloodHound / SharpHound [V parcial] | Mapeo de rutas de ataque en Active Directory a partir de la relación entre usuarios, grupos y permisos. Solo aplicable si el CTF incluye un dominio AD. La página oficial consultada describe la edición Enterprise; las particularidades de Community Edition y BloodHound.py [NV] deben verificarse en la documentación oficial. | SharpHound: nativo Windows (dominio). BloodHound.py: Kali-WSL |
 | Ligolo-ng / chisel / proxychains (pivoting) [NV] | Túneles para acceder a redes internas desde el host comprometido. No se han verificado en esta sesión; ver fuentes de pivoting en el plan de red. | Kali-WSL (cliente) + objetivo |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Persistence · Privilege Escalation · Lateral Movement · Command and Control · Impact.
+
 ## Procedimiento paso a paso
 
 ### Linux

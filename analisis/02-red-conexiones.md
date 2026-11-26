@@ -28,6 +28,8 @@
 | proxychains4 | Enrutar herramientas TCP por un proxy SOCKS a través de un pivote. | Kali/WSL: sí. Windows: no nativo. |
 | chisel | Túneles TCP/SOCKS sobre HTTP cuando no hay TUN. | Multiplataforma (binario). |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Reconnaissance · Discovery · Lateral Movement.
+
 ## Procedimiento paso a paso
 Orden: de lo pasivo a lo activo. Sustituir `10.10.10.0/24`, `eth0` y `10.10.10.5` por los valores del reto.
 

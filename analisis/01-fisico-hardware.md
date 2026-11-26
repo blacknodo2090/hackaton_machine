@@ -30,6 +30,8 @@
 | Proxmark3 | Lectura y clonación de RFID/NFC de baja frecuencia y 13,56 MHz (no investigado en esta fuente). | Multiplataforma (no verificado en esta investigación). |
 | ChipWhisperer | Fault injection y glitching (no investigado en esta fuente). | Multiplataforma (no verificado en esta investigación). |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Reconnaissance (RF/BLE/NFC/SDR).
+
 ## Procedimiento paso a paso
 Orden: de lo no invasivo a lo invasivo. Sustituir rutas y nombres por los del reto.
 

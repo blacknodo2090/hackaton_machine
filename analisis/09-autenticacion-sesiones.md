@@ -32,6 +32,8 @@
 | PowerShell | Decodificar JWT en local sin herramientas (ver paso 7) | Windows: sí (nativo) |
 | openssl | Generar claves y firmas HMAC/RSA de prueba | Windows: sí (vía Git for Windows o instalador). Kali/WSL: sí |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Credential Access · Initial Access.
+
 ## Procedimiento paso a paso
 
 1. **Mapear el mecanismo de autenticación.** Captura el flujo completo: login, redirecciones, cookies emitidas, token devuelto y cómo se envía en peticiones siguientes.

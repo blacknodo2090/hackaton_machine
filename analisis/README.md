@@ -16,6 +16,8 @@ Son **metodología**. Aplica un plan a un objetivo real **solo** si ese objetivo
 figura en un `ctf/targets/<objetivo>/SCOPE.md` confirmado (ver `ctf/PLAYBOOK.md`).
 Sin alcance confirmado, los planes se leen y se preparan, pero no se lanzan.
 
+**Catálogo completo de herramientas Kali:** [docs/tools/KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md).
+
 ## Índice
 
 ### Reconocimiento y superficie de ataque

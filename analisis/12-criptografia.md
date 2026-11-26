@@ -29,6 +29,8 @@
 | openssl CLI | Descifrado rápido con AES, pruebas de formatos PEM/DER, `openssl rsa -text` | Ambos (en Windows, el de Git for Windows o el de WSL) |
 | CryptoHack / cryptopals | Práctica y referencia de ataques por reto [N: no verificado en esta sesión] | Web |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Credential Access (Hashes/Cracking).
+
 ## Procedimiento paso a paso
 
 1. **Identificar el esquema.**

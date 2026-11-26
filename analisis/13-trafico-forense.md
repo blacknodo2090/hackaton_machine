@@ -27,6 +27,8 @@
 | CyberChef | Decodificar base64, hex, XOR, gzip sobre el texto extraído | Web local o en navegador, sin instalación |
 | Python `pyshark` | Wrapper de tshark para scripts | Windows y Kali (requiere tshark instalado) |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Forensics · Collection · Exfiltration.
+
 ## Procedimiento paso a paso
 
 1. **Metadatos y tipo de captura.** Confirmar formato, enlaces y rango temporal.

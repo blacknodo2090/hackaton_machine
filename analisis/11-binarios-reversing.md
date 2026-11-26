@@ -35,6 +35,8 @@
 | pwntools | Scripts de explotación, `ELF()`, `process()`, `remote()` | Windows (Python) y Kali-WSL |
 | `binwalk` | Detectar contenido empaquetado o embebido | Kali-WSL |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Execution · Forensics.
+
 ## Procedimiento paso a paso
 
 1. **Triaje.**

@@ -37,6 +37,8 @@ Convención: **[V]** = comprobado en la fuente indicada durante la investigació
 | Proxmark3 (Iceman) | Lectura y ataque MIFARE, LF/HF; `hf mf nested` con clave conocida | Cliente Linux/Windows según build [V cheatsheet; NP] |
 | libnfc `nfc-list` | Detecta lectores PN532 y etiquetas | Linux [NP; manual oficial no consultado] |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Reconnaissance (WiFi/BT/RF) · Credential Access (WiFi).
+
 ## Procedimiento paso a paso
 
 Ruta A — Wi-Fi WPA/WPA2-PSK (captura del handshake y crackeo offline). Ejecutar en Kali o VM con USB; el crackeo puede hacerse después en otra máquina.

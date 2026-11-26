@@ -26,6 +26,8 @@ Convención: **[V]** = comprobado en la fuente indicada durante la investigació
 | Editor de cabeceras (PowerShell o Python estándar) | Parseo de `.eml`: `From`, `Reply-To`, `Return-Path`, `Received`, `Authentication-Results` | Ambos [NP: práctica habitual] |
 | MITRE ATT&CK Navigator | Mapear las técnicas usadas en el ejercicio y el resultado | Navegador en ambos [NP] |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Resource Development · Initial Access.
+
 ## Procedimiento paso a paso
 
 1. **Confirmar alcance y reglas del ejercicio.** Lee `ctf/SCOPE.md`. Anota qué personas o buzones están dentro, qué vectores están permitidos (correo, web, adjuntos) y qué queda prohibido. Si el reto solo pide analizar un correo, salta a los pasos 6 y 7.

@@ -30,6 +30,8 @@
 | `find`, `ls -la`, `stat` | Buscar archivos con permisos de escritura para otros, copias y archivos ocultos. | Kali/WSL. |
 | `rg` (ripgrep) | Buscar patrones de contraseñas y claves en configuraciones y en código. | Nativo Windows (instalable) y Kali/WSL. |
 
+> **Catálogo Kali:** ver [KALI_CATALOG.md](../docs/tools/KALI_CATALOG.md) → Defense Evasion · Services and Other Tools.
+
 ## Procedimiento paso a paso
 
 Los comandos usan marcadores: `OBJETIVO` (host o URL dentro del alcance), `RUTA` (copia local del repositorio o carpeta) y `EVID` (carpeta de evidencias). Antes de ejecutar, revisar la ayuda local con `--help`, porque las opciones pueden cambiar entre versiones.
