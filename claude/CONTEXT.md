@@ -31,7 +31,15 @@ con Claude. No es una fuente de verdad independiente: usa
 
 ## Notas de trabajo de Claude
 
-- Tarea activa: función de Gemini para fichas de herramientas (`docs/tools/`).
+- Tarea activa (2026-11-26): MIGRAR todo el proyecto (repo + agentes) a un
+  equipo dedicado con Kali Linux como único SO (decisión en `docs/DECISIONS.md`).
+  Vía: subir todo a GitHub desde Windows y clonar en Kali. Pendiente de portar a
+  bash/tmux: lanzadores (`scripts/*.ps1`, `ctf/scripts/*.ps1`), hook de arranque
+  y pruebas; reinstalar y re-loguear las CLIs de agentes en Kali.
+- Descartado (usuario, 2026-11-26): Docker y WSL. El equipo destino ya es Kali
+  nativo, así que no se usa ni contenedor ni WSL.
+- Pendiente tras la migración: confirmar `ctf/SCOPE.md` con los datos del evento.
+- Tarea anterior: función de Gemini para fichas de herramientas (`docs/tools/`).
 - Agente asignado y resultado esperado: Codex revisa/termina el borrador
   `scripts/ask-gemini-tool.ps1` + `docs/tools/` y lo prueba con nmap.
 - Regla (usuario, 2026-11-25): Claude solo hace el plan y el prompt; Codex

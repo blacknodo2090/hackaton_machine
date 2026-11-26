@@ -161,3 +161,13 @@ con Codex. No es una fuente de verdad independiente: usa
   el ciclo de trabajo para triaje, confirmación de alcance, análisis de
   artefactos locales, revisión defensiva y registro de banderas. Quedó
   pendiente la parte solicitada sobre coordinación de exploits y escalada.
+
+- Catálogo de Kali (2026-11-26). Se incorporó el informe de Gemini en
+  `docs/tools/KALI_CATALOG.md` y se enlazó desde las 15 fichas y el índice
+  de `analisis/`. Se conservaron las tablas compartidas y los dos diagramas.
+  La validación comparó 501 filas con la fuente y comprobó anclas, enlaces,
+  ausencia de marcadores de cita y preservación del texto previo de las fichas.
+
+- Entorno (2026-11-26): se descartó Docker. El proyecto migra a un equipo
+  dedicado con Kali Linux nativo (ver `docs/DECISIONS.md`). De esa exploración
+  solo se conservó `*.ovpn` en `.gitignore` y la regla LF para `*.sh`.
