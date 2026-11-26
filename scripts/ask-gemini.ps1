@@ -18,7 +18,7 @@ param(
     [string]$Alcance = '',
     [string]$SolicitadoPor = 'Claude',
     [int]$TimeoutSec = 900,
-    [string]$Modelo = ''
+    [string]$Modelo = 'gemini-3.5-flash-lite'
 )
 
 $ErrorActionPreference = 'Stop'

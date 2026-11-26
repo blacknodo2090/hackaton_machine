@@ -10,4 +10,5 @@ Anota aquí las decisiones que afecten al equipo, junto con su contexto.
 | 2026-11-25 | Carpeta de notas de Gemini renombrada de `geminai/` a `gemini/` | Corregir errata y unificar nombres | Acordada |
 | 2026-11-25 | El proyecto se orienta a un concurso de simulación de ataque / CTF autorizado. Workspace en `ctf/` con playbook por fases, plantilla por objetivo y barrera de autorización (`SCOPE.md`) antes de atacar | Dirección del usuario para la hackaton | Acordada |
 | 2026-11-25 | Entorno de herramientas: kit Python nativo en Windows listo (scapy, impacket, pwntools, nmap 7.80); WSL2+Kali pendiente de instalación manual como admin (`ctf/scripts/install-wsl.ps1`) | WSL requiere elevación y reinicio que la sesión automatizada no puede hacer | Acordada |
+| 2026-11-25 | Gemini CLI usa gemini-3.5-flash-lite por defecto (aprobado por el usuario) | 2.5 retirados, 3.8-flash saturado (503), 3.1-pro-preview sin cuota | Acordada |
 

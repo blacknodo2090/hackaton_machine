@@ -15,6 +15,16 @@ usar un contexto compartido y notas específicas por herramienta.
 - No mantengas copias divergentes del brief, la arquitectura ni las decisiones
   en los contextos específicos.
 
+## Arranque de los agentes
+
+`.\scripts\start-agents.ps1` abre Windows Terminal con Claude (orquestador),
+Gemini (investigación) y Codex (implementación) en la raíz del proyecto. Cada
+CLI arranca en modo interactivo con un prompt inicial que le pide leer sus
+instrucciones, este flujo, el contexto común, sus notas, el brief y las
+decisiones; confirmar su rol y esperar instrucciones. Opciones:
+`-Agentes claude,codex` (subconjunto), `-Modo paneles|pestanas|ventanas`,
+`-Agente gemini` (solo uno, en la terminal actual) y `-SinPrompt`.
+
 ## Reglas de colaboración
 
 1. **El usuario supervisa** y tiene la última palabra en prioridades y
@@ -61,6 +71,22 @@ de que las conversaciones de las CLI se comuniquen entre sí:
 Los informes separan hechos respaldados por fuentes, análisis y recomendación.
 Gemini no modifica el brief ni el registro de decisiones como parte de una
 investigación; cualquier propuesta sigue pendiente de revisión y aprobación.
+
+### Fichas de herramientas con Gemini
+
+`.\scripts\ask-gemini-tool.ps1 -Programa nmap -Enfoque "reconocimiento de red y servicios en CTF" -AyudaCmd "nmap --help"`
+
+El script requiere Gemini CLI autenticado en la sesión y le envía el encargo
+por stdin en modo `plan`. Gemini consulta documentación oficial y manuales.
+Si `-AyudaCmd` termina correctamente, el script adjunta hasta 20.000 caracteres
+de su salida para documentar la versión instalada. Si falla, Gemini trabaja con
+las fuentes web.
+El script guarda la ficha en `docs/tools/<programa>.md` según
+`docs/tools/TEMPLATE.md` y añade su enlace una vez al índice
+`docs/tools/README.md`. Usa `-Actualizar` para reemplazar una ficha existente.
+`-Modelo` selecciona el modelo y `-TimeoutSec` limita cada comando (900 s por
+defecto). Ante un 429 / `RESOURCE_EXHAUSTED`, la ejecución avisa y conserva los
+archivos existentes.
 
 ## Configuración de credenciales
 

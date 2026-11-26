@@ -1,0 +1,56 @@
+{
+  "folders": [
+    {
+      "name": "Hackaton",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "task.allowAutomaticTasks": "on",
+    "terminal.integrated.defaultProfile.windows": "PowerShell"
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Claude - Orquestador",
+        "type": "process",
+        "command": "powershell.exe",
+        "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "scripts/start-agents.ps1", "-Agente", "claude"],
+        "options": { "cwd": "${workspaceFolder:Hackaton}" },
+        "presentation": { "panel": "dedicated", "reveal": "always" },
+        "runOptions": { "runOn": "folderOpen" },
+        "problemMatcher": []
+      },
+      {
+        "label": "Gemini - Investigacion",
+        "type": "process",
+        "command": "powershell.exe",
+        "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "scripts/start-agents.ps1", "-Agente", "gemini"],
+        "options": { "cwd": "${workspaceFolder:Hackaton}" },
+        "presentation": { "panel": "dedicated", "reveal": "always" },
+        "runOptions": { "runOn": "folderOpen" },
+        "problemMatcher": []
+      },
+      {
+        "label": "Codex - Implementacion",
+        "type": "process",
+        "command": "powershell.exe",
+        "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "scripts/start-agents.ps1", "-Agente", "codex"],
+        "options": { "cwd": "${workspaceFolder:Hackaton}" },
+        "presentation": { "panel": "dedicated", "reveal": "always" },
+        "runOptions": { "runOn": "folderOpen" },
+        "problemMatcher": []
+      },
+      {
+        "label": "Iniciar IAs",
+        "dependsOrder": "parallel",
+        "dependsOn": [
+          "Claude - Orquestador",
+          "Gemini - Investigacion",
+          "Codex - Implementacion"
+        ]
+      }
+    ]
+  }
+}

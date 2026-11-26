@@ -11,6 +11,7 @@ vendor/
 dist/
 build/
 coverage/
+graphify-out/
 __pycache__/
 *.py[cod]
 

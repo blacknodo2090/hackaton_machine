@@ -31,8 +31,11 @@ con Claude. No es una fuente de verdad independiente: usa
 
 ## Notas de trabajo de Claude
 
-- Tarea activa:
-- Agente asignado y resultado esperado:
+- Tarea activa: función de Gemini para fichas de herramientas (`docs/tools/`).
+- Agente asignado y resultado esperado: Codex revisa/termina el borrador
+  `scripts/ask-gemini-tool.ps1` + `docs/tools/` y lo prueba con nmap.
+- Regla (usuario, 2026-11-25): Claude solo hace el plan y el prompt; Codex
+  implementa y ejecuta comandos. Antes de dar comandos, consultar `docs/tools/`.
 - Contexto específico de la tarea:
 - Informe de Gemini recibido / ruta:
 - Hallazgos verificados e integración:

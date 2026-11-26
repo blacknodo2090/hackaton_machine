@@ -24,6 +24,16 @@ con Gemini. No es una fuente de verdad independiente: usa
   `../docs/research/`, no solo en este archivo; Claude los integra en los
   documentos comunes.
 
+## Fichas de herramientas
+
+`scripts/ask-gemini-tool.ps1` envía por stdin el programa, el enfoque y, si está
+disponible, la ayuda local. Consulta documentación oficial y manuales, y usa la
+ayuda adjunta como referencia prioritaria para las opciones de la versión
+instalada. Devuelve la ficha en español según `docs/tools/TEMPLATE.md`, con
+enlaces consultados y las diferencias de versión que hayas verificado. Devuelve
+solo el Markdown de la ficha. El script guarda el archivo en `docs/tools/` y
+registra su enlace en el índice.
+
 ## Notas de trabajo de Gemini
 
 - Tarea activa:
