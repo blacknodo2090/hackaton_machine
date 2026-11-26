@@ -67,12 +67,14 @@ if ($Agente) {
     }
     Write-Host "== $($p.Titulo) ==  ($root)" -ForegroundColor Cyan
     $cliArgs = @()
+    if ($Agente -eq 'gemini') { $cliArgs += @('-m', 'gemini-3.5-flash-lite') }
     if (-not $SinPrompt) {
         # gemini necesita -i para ejecutar el prompt y seguir en modo interactivo;
         # claude y codex aceptan el prompt como argumento posicional.
         if ($Agente -eq 'gemini') { $cliArgs += '-i' }
         $cliArgs += $p.Prompt
     }
+    $env:HACKATON_AGENTS_LAUNCHED = '1'
     & $p.Cli @cliArgs
     return
 }

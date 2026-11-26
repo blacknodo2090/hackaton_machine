@@ -1,0 +1,53 @@
+# 15 monitores de red de consola
+
+Fuente de partida: topic https://github.com/topics/network-monitoring (páginas 1, 2 y 3; el botón "Cargar más" no expone URL propia). Criterio: (1) interfaz de consola (TUI o CLI) con salida legible como texto; (2) funciones variadas, no utilidades de una línea; (3) ámbitos distintos (procesos/host, ancho de banda, latencia, descubrimiento LAN, flujos y forense de paquetes, IDS, pruebas de conectividad). Se descartan herramientas web, GUI de escritorio y librerías sin interfaz propia. Las filas marcadas "adyacente al topic" no aparecen en las páginas revisadas del topic.
+
+Verificación: los datos proceden de las páginas de cada repo (README) y de su extracción; no se ejecutó ninguna herramienta. Lo no confirmado va marcado con [NV].
+
+## Selección (15)
+
+| # | Herramienta | Repo (URL) | Ámbito | Interfaz (CLI/TUI) | Funciones clave | Plan/fase donde ayuda |
+|---|---|---|---|---|---|---|
+| 1 | RustNet | https://github.com/domcyrus/rustnet | Conexiones por proceso, DPI | TUI (Linux, macOS, Windows, FreeBSD); modo headless con snapshots JSON | Conexiones con atribución de proceso; identificación de HTTP, TLS/SNI, DNS, SSH, QUIC; DNS pasivo; filtros por proceso, IP, puerto y protocolo; exporta PCAP/PCAPNG; Windows requiere Npcap | 02 Red/conexiones; 13 Tráfico/forense |
+| 2 | netwatch | https://github.com/matthart1983/netwatch | Ancho de banda, sockets, diagnóstico | TUI (Rust) | Ancho por proceso; tasas, errores y drops por interfaz; sockets con PID, estado, GeoIP, RTT y retransmisiones; pestaña de diagnóstico; traceroute en topología; exporta PCAP/PCAPNG; métricas Prometheus; Windows requiere Npcap | 02 Red/conexiones; 03 Puertos/servicios |
+| 3 | bmon | https://github.com/Jafaral/bmon | Ancho de banda por interfaz | TUI curses + salida texto/JSON para scripts | Tasas y estadísticas por interfaz; gráficas en Braille; direcciones IPv4/IPv6; opciones de TC ingress/egress (según changelog) | 02 Red (líneas base y picos de tráfico) |
+| 4 | gping | https://github.com/orf/gping | Latencia | TUI (gráfica de ping en terminal) | Ping a varios hosts en un gráfico; `--cmd` para graficar tiempo de comandos; buffer, intervalo, interfaz; modo sin braille; objetivos `aws:región` (solo AWS) | 02 Red (latencia y saltos, VPN/pivoting) |
+| 5 | picosnitch | https://github.com/elesiuta/picosnitch | Tráfico por ejecutable (BPF) | CLI + TUI (`picosnitch tui`) + web (localhost:5100); solo Linux | Ancho por ejecutable, hash, padre/abuelo, dominio, puerto y usuario; alertas de programas nuevos o binarios modificados; registro en SQLite, CSV o BD remota; `top` en vivo | 02 Red/conexiones; 15 Post-explotación |
+| 6 | Kula | https://github.com/c0m4r/kula | Monitor de host Linux (red, sockets, disco, contenedores) | TUI (`./kula tui`) + dashboard web + Prometheus; solo Linux | Lectura cada segundo de /proc y /sys: CPU, memoria, interfaces, TCP, sockets, disco, procesos, Docker/podman, PostgreSQL, MySQL, nginx, Apache; almacenamiento en anillo con agregados a 1 y 5 min | 10 Configuración/hardening; 15 Post-explotación (en host ya accedido) |
+| 7 | SuzieQ | https://github.com/netenglabs/suzieq | Observabilidad de red (topología, rutas, vecinos) | CLI (`suzieq-cli`) + GUI + API REST + objetos Python | Datos normalizados de LLDP, tablas MAC, ARP/ND, rutas, OSPFv2, BGP, EVPN; traza de ruta entre dos IP; "asserts" sobre la red; requiere inventario; no probado en Windows según su README | 02 Red (topología y rutas en laboratorio) |
+| 8 | LAN-Orangutan | https://github.com/291-Group/LAN-Orangutan | Descubrimiento y seguimiento de dispositivos LAN | CLI (con salida JSON) + web | Escaneo con nmap; IPv4 e IPv6; lectura de tabla ARP; etiquetado y snapshots para comparar; alertas de dispositivo nuevo, ausente o con cambio de dirección; webhooks (Telegram, Slack, ntfy, etc.) | 02 Red (inventario de hosts); 07 Reconocimiento interno |
+| 9 | Zeek | https://github.com/zeek/zeek | Análisis de red a nivel de aplicación | CLI y scripts sobre pcap o interfaz [NV: sintaxis `zeek -r` no confirmada en el README] | Analizadores de protocolos de aplicación; lenguaje de scripting para políticas de monitoreo; registro de actividad de red; licencia BSD | 13 Tráfico/forense; 02 Red |
+| 10 | Suricata | https://github.com/OISF/suricata | IDS/IPS y NSM | CLI, modos pasivo e IPS [NV: flags de lectura de pcap y salida EVE JSON no confirmados en el README] | Motor IDS/IPS/NSM; reglas de firmas; GPL-2.0 | 13 Tráfico/forense (alertas sobre pcap); 04 Aplicaciones web (firmas sobre tráfico capturado) |
+| 11 | Maltrail | https://github.com/stamparm/maltrail | Detección de tráfico malicioso | Sensor CLI (Rust, libpcap) + servidor web (puerto 8338) + consola (`--console`) | Indicadores de dominios, URLs, IP, pares IP:puerto, User-Agent, JA3/JA4 y certificados; heurísticas de escaneo, DNS, DGA y descargas sospechosas; `--detect-test` con pcap; Windows con Npcap | 13 Tráfico/forense; 02 Red |
+| 12 | dstp | https://github.com/ycd/dstp | Pruebas de conectividad (ping, DNS, TLS) | CLI (`-o json` o texto plano) | Ping con número de paquetes y timeout (`-p`, `-t`); resolución DNS con servidor propio (`--dns`); prueba TLS/HTTPS con puerto configurable (`--port`, 443 por defecto); binarios para Windows | 02 Red (comprobaciones previas por host); 10 Configuración/TLS |
+| 13 | fping | https://github.com/schweikert/fping | Barrido ICMP masivo | CLI | Ping en paralelo a muchos hosts, más rápido que `ping` según el README; modo sin root en macOS y Linux (ping_group_range); imagen Docker. Opciones de bucle, fichero de entrada y estadísticas [NV: ver fping(8)] | 02 Red (hosts vivos en rangos); 03 Puertos/servicios (fase previa) |
+| 14 | IPTraf-ng (adyacente al topic) | https://github.com/iptraf-ng/iptraf-ng | Tráfico IP por interfaz, TCP/UDP y estaciones LAN | Consola (ncurses), solo Linux; GPL-2.0 | Estadísticas de interfaz; tráfico IP, TCP, UDP, ICMP y OSPF con conexiones TCP activas; conteos por puerto, por tamaño de paquete y por dirección IP; flags TCP; estadísticas de estaciones LAN; soporta Ethernet, PLIP, loopback, SLIP/PPP, GRE, QinQ y SIT [NV: filtros y logs no detallados en el README] | 02 Red (tráfico por host y puerto); 13 Tráfico (estadísticas rápidas en pruebas) |
+| 15 | termshark (adyacente al topic) | https://github.com/gcla/termshark | Analizador de paquetes en TUI (sobre tshark) | TUI; requiere tshark en el PATH; Linux, macOS, BSD, Android (termux) y Windows; MIT | Lectura de pcap (`termshark -r`) y captura en vivo (`-i`); filtros de visualización de Wireshark; reconstrucción de flujos TCP/UDP; vista de conversaciones por protocolo; copia de rangos de paquetes al portapapeles | 13 Tráfico/forense (inspección de pcap en terminal); 02 Red |
+
+## Descartadas relevantes
+
+- **nfstream** (https://github.com/nfstream/nfstream): sustituida por IPTraf-ng; librería Python sin CLI propia (decisión de coordinación).
+- **prettyping** (https://github.com/denilsonsa/prettyping): sustituida por termshark; funcionalidad mínima (decisión de coordinación).
+- **nload** (https://github.com/rolandriegel/nload; en topic, página 3): consola de tráfico en tiempo real, pero con una sola función (ancho de banda); no se eligió frente a IPTraf-ng por riqueza de funciones.
+- **graphpath** (https://github.com/ocochard/graphpath; en topic, página 3): genera diagramas ASCII desde la tabla de rutas; no es monitor de tráfico.
+- **Sniffnet** (https://github.com/GyulyVGC/sniffnet): solo GUI (iced); sin modo terminal.
+- **Arkime** (https://github.com/arkime/arkime): interfaz web principal; sin CLI útil documentada.
+- **NetAlertX** (https://github.com/netalertx/NetAlertX): web en Docker; sin CLI.
+- **unpoller** (https://github.com/unpoller/unpoller): daemon headless para UniFi que exporta a InfluxDB, Prometheus o Loki; sin interfaz de consola propia.
+- **Netdisco, Ozark NetworkOptimizer, Atlas, NetGraph, OpenNMS, Zabbix, NetXMS, Pandora FMS, itops-agent-platform, MikroDash, netpulse, dstatus**: web o plataformas de servidor.
+- **Chucker, CocoaDebug, netfox, Dotzu, Jiumi, ReactiveNetwork, whataa/pandora, NetworkEye, react-native-network-logger, RocketSimApp**: bibliotecas o apps de móvil/iOS/Android o de Xcode.
+- **Speed-Test (OpenSpeedTest), NetSpeedTray, WFN (Windows, GUI)**: web HTML5 o GUI de Windows.
+- **brook, Lifka/hacking-resources, Hacking-Tools**: proxy/túnel, colección de recursos y colección de utilidades; no son monitores.
+- **sharppcap**: biblioteca .NET de captura sin interfaz propia.
+
+## Notas y dudas
+
+- **Sustituciones (pendientes de aprobación):** IPTraf-ng (14) y termshark (15) sustituyen a nfstream y prettyping. Ambas son de consola y ricas en funciones. Ninguna figura en las páginas revisadas del topic (1 a 3), por lo que se marcan como "adyacente al topic". Motivo de IPTraf-ng: monitoriza tráfico por interfaz, puerto y estación LAN en consola, cubriendo un hueco que dejaba prettyping. Motivo de termshark: TUI de análisis de pcap con filtros de Wireshark, cubriendo la función forense que dejaba nfstream. Del topic, el único candidato consola fue nload, con una sola función, y graphpath no es monitor de tráfico.
+- **Cumplimiento:** las 15 filas cumplen el criterio de consola. Termshark depende de tshark instalado; IPTraf-ng es solo Linux.
+- **Huecos de ámbito:** el topic no incluye un monitor SNMP de consola verificado. Pendiente buscar un cliente SNMP fuera del topic si el reto lo requiere.
+- **Captura de paquetes pura:** tcpdump no aparece en el topic. Termshark cubre la visualización y captura vía tshark.
+- **Plataforma:** el entorno es Windows 11. Picosnitch, Kula e IPTraf-ng son solo Linux (usar WSL o Kali). SuzieQ no está probado en Windows según su README. Zeek y Suricata: soporte en Windows no verificado [NV]. RustNet, netwatch, Maltrail, termshark y dstp necesitan Npcap o binarios para Windows, según el caso.
+- **Opciones no confirmadas:** `zeek -r`, flags de Suricata, salida EVE JSON, opciones de fping y filtros/logs de IPTraf-ng no se verificaron en el README; comprobar con `--help`, `man` o documentación oficial antes de usarlas.
+- **Licencias:** RustNet Apache-2.0; netwatch, gping, bmon, LAN-Orangutan, dstp, termshark y Maltrail (motor) MIT; Maltrail usa términos propios para su lista de trails estática; picosnitch GPL-3.0; Kula AGPL-3.0 (la insignia dice GPL); SuzieQ Apache-2.0; IPTraf-ng GPL-2.0; Zeek BSD; Suricata GPL-2.0; fping BSD.
+- **Limitación:** selección documental. Antes de usar cualquiera en el CTF, probar en entorno propio y confirmar que el objetivo figura en `ctf/SCOPE.md`.
+- **Pendiente de aprobación:** la selección es una propuesta.

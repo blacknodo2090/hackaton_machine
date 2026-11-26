@@ -90,3 +90,74 @@ con Codex. No es una fuente de verdad independiente: usa
 - Pendiente: probar el doble clic y las tres sesiones reales en VS Code. En la
   versión instalada, el permiso de tareas automáticas es global y se concede
   desde VS Code. El README documenta el aviso inicial y el relanzamiento.
+
+- Hook local de Claude (2026-11-25): `scripts/claude-session-start.ps1` carga
+  el contexto y solicita la apertura de Gemini y Codex mediante
+  `scripts/start-agents.ps1`. Detecta los procesos del lanzador en esta
+  carpeta, incluidos los que aún están abriendo terminales. El modo
+  `-Agente` marca la sesión antes de invocar la CLI. La configuración de
+  Claude queda en `.claude/settings.local.json`, ignorada por Git.
+- Validación: parser de PowerShell 5.1, JSON local,
+  `powershell.exe -NoProfile -ExecutionPolicy Bypass -File tests/test_claude_session_start.ps1`
+  y `git diff --check` correctos. Al pasar el JSON por stdin a
+  `powershell -NoProfile -File scripts/claude-session-start.ps1`, `startup`
+  con opt-out y `resume` devolvieron los cuatro documentos y código 0 en
+  568 ms y 467 ms. El comando configurado funcionó desde Git Bash con opt-out
+  en 556 ms. `git status --ignored=matching` y `git check-ignore -v`
+  confirmaron que se ignora el JSON.
+- Pendiente de prueba en la sesión de Juan: abrir Claude de forma interactiva.
+  La cuenta de pruebas recibió acceso denegado en la consulta CIM. La
+  detección, el lanzamiento y el manejo de ese fallo se probaron con
+  simulaciones, sin abrir ventanas.
+
+- Respaldo de investigación (2026-11-25): `scripts/start-agents.ps1` fija
+  `-m gemini-3.5-flash-lite` antes de `-i` y también pasa el modelo con
+  `-SinPrompt`. Si falla `scripts/ask-gemini.ps1`, Claude delega en
+  `.claude/agents/investigador.md` (Haiku). El flujo y la decisión quedaron
+  registrados en `docs/AI_WORKFLOW.md`, `claude/CONTEXT.md` y `docs/DECISIONS.md`.
+- Validación: `Parser.ParseFile` de PowerShell 5.1 y frontmatter con el parser
+  YAML 1.2 incluido en VS Code. Pasaron `powershell.exe -NoProfile
+  -ExecutionPolicy Bypass -File tests/test_start_agents.ps1` y el mismo comando
+  con `tests/test_claude_session_start.ps1`, ambos con simulaciones.
+  `git diff --check` pasó y `git check-ignore` confirmó que Git admite el
+  archivo del subagente.
+- Pendiente: comprobar la delegación en una sesión real de Claude Code. Falta
+  `GEMINI_API_KEY` para Gemini y `ctf/SCOPE.md` para que el respaldo confirme
+  qué objetivos del CTF admiten investigación descriptiva o defensiva.
+
+- Ficha de Nmap con Gemini (2026-11-25). Se capturó `nmap --help` y se
+  ejecutó una vez `scripts/ask-gemini-tool.ps1` con enfoque de inventario
+  defensivo. Gemini CLI terminó con código 41 en 1733 ms. La comprobación
+  de `GEMINI_API_KEY` en el entorno de usuario de Windows devolvió `False`
+  en la sesión aislada. Se confirmó que la ficha y el enlace siguen pendientes.
+
+- Despacho de tareas (2026-11-25). `scripts/run-codex.ps1` abre la TUI con
+  el prompt de archivo y escribe `codexN.exit`. `scripts/run-gemini.ps1`
+  selecciona el script de investigación o fichas, carga la clave desde el
+  entorno de usuario de Windows y escribe `gemini.<tarea>.exit`. El despacho
+  desde ventanas PowerShell visibles está documentado en `docs/AI_WORKFLOW.md`.
+- Validación con PowerShell 5.1. `Parser.ParseFile` aceptó ambos lanzadores.
+  Pasaron `tests/test_dispatch_launchers.ps1` y `tests/test_ask_gemini_tool.ps1`
+  con simulaciones. La sesión aislada carece de la clave de usuario. Se probó
+  el reenvío de argumentos de Gemini con un valor simulado. Queda pendiente la
+  ejecución interactiva en la sesión de usuario.
+
+- Reorientación del repositorio (2026-11-25). El README, el brief y la
+  arquitectura describen la operación del CTF autorizado. Se eliminó `src/`
+  tras comprobar que estaba vacía y se documentó `GEMINI_API_KEY` sin valor.
+  Gemini y el investigador requieren un `ctf/SCOPE.md` confirmado para
+  documentar CVEs, impacto y mitigaciones sobre un objetivo. La ampliación a
+  investigación orientada a exploits y el flujo ofensivo entre agentes
+  quedaron fuera de esta implementación.
+- Validación: ausencia de `src/`, brief y arquitectura sin marcadores,
+  `git status --short`, `git diff --check` y búsqueda del prefijo de claves de
+  Google sin coincidencias en archivos versionados o sin seguimiento. La prueba
+  de extracción Markdown de Graphify quedó bloqueada por falta de acceso
+  a Python en la sesión aislada.
+- Pendiente del equipo: confirmar `ctf/SCOPE.md`, completar Kali en WSL2
+  y reconciliar el resumen de estado de `docs/COMMON_CONTEXT.md` con el brief.
+
+- Playbook CTF (2026-11-26, B-6 parcial). Se añadieron los roles por fase y
+  el ciclo de trabajo para triaje, confirmación de alcance, análisis de
+  artefactos locales, revisión defensiva y registro de banderas. Quedó
+  pendiente la parte solicitada sobre coordinación de exploits y escalada.

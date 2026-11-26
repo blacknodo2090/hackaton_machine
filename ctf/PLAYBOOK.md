@@ -137,3 +137,40 @@ payloads, y dónde estaba la bandera. No subas banderas ni credenciales a git.
 - [ ] `nmap -sC -sV -p-`, enum por servicio
 - [ ] Credenciales por defecto, versiones con CVE
 - [ ] Shell → estabilizar → escalada de privilegios → bandera
+
+---
+
+## Coordinación de agentes por fase
+
+Mapea las fases ofensivas de arriba (Reconocimiento → Bandera) a cada agente.
+Todo objetivo requiere un `SCOPE.md` confirmado antes de la Fase 1.
+
+| Fase | Claude (orquesta) | Gemini / investigador (investiga) | Codex (ejecuta) | Usuario |
+|---|---|---|---|---|
+| 0 Triaje | Clasifica el reto y crea su carpeta | — | — | Elige la prioridad |
+| 1 Reconocimiento | Asigna y lee resultados | — | Corre `recon.ps1` (nmap `-sC -sV -p-`), vuelca `loot/` | Confirma `SCOPE.md` |
+| 2 Enumeración | Integra hallazgos en `NOTES.md` | Documenta servicios/versiones y técnicas de enumeración | Enumera por servicio (web, SMB, FTP, DB…) | — |
+| 3 Vulnerabilidades | Mapea hallazgos → vectores | Investiga CVEs y técnicas de explotación (dentro de `SCOPE.md`) | Prepara PoCs y comprueba precondiciones | — |
+| 4 Explotación | Prioriza y rota vectores (~15-20 min) | Aclara el exploit o payload concreto | Escribe y ejecuta el exploit, estabiliza la shell | Aprueba acciones sensibles |
+| 5 Post-explotación y bandera | Verifica y registra | Investiga técnicas de escalada para el SO/servicio | Escala privilegios, `flag-grep.ps1`, captura la bandera | Envía la bandera |
+| 6 Documentación | Consolida `NOTES.md` y `DECISIONS.md` | Entrega las fuentes | Guarda los payloads que funcionaron | — |
+
+## Bucle de operación en vivo
+
+1. Claude clasifica el reto (Fase 0) y crea su carpeta con
+   `ctf/scripts/new-target.ps1 <nombre>` desde la raíz del repositorio.
+2. El usuario confirma el `SCOPE.md` del objetivo. Codex ejecuta el
+   reconocimiento con `ctf/scripts/recon.ps1` (nmap `-sC -sV -p-`), vuelca a
+   `loot/` y registra lo encontrado en `NOTES.md`.
+3. Codex enumera cada servicio. Claude mapea los hallazgos a vectores y
+   reparte: la investigación de CVEs y técnicas de explotación va a Gemini o al
+   subagente investigador (limitada a objetivos en `SCOPE.md`), y Codex prepara
+   y ejecuta el exploit del vector más prometedor.
+4. Si un vector no avanza en ~15-20 min, se registra y se rota a otro. Tras
+   conseguir acceso, Codex escala privilegios si hace falta y busca la bandera
+   con `ctf/scripts/flag-grep.ps1`; Claude verifica y el usuario la envía.
+
+Reglas: paralelizar retos distintos con un máximo de cuatro instancias de Codex
+y archivos de trabajo separados; no estancarse en un vector; el despacho usa
+`scripts/run-codex.ps1` (Codex) y `scripts/run-gemini.ps1` (Gemini), descritos
+en [`docs/AI_WORKFLOW.md`](../docs/AI_WORKFLOW.md#despacho-de-tareas).

@@ -25,6 +25,23 @@ decisiones; confirmar su rol y esperar instrucciones. Opciones:
 `-Agentes claude,codex` (subconjunto), `-Modo paneles|pestanas|ventanas`,
 `-Agente gemini` (solo uno, en la terminal actual) y `-SinPrompt`.
 
+## Despacho de tareas
+
+- **Codex.** Claude escribe el encargo en un archivo y termina el prompt
+  pidiendo que Codex guarde el resumen en `<MarkerDir>\codexN.done`.
+  Claude abre una ventana PowerShell visible con `-NoExit` y ejecuta
+  `scripts/run-codex.ps1 -N <N> -Tarea <tarea> -PromptFile <ruta> -MarkerDir <ruta>`.
+  El lanzador inicia la TUI interactiva y registra el código en `codexN.exit`.
+  Claude espera `codexN.done`, `codexN.exit` o el cierre de la ventana.
+  Está prohibido usar `codex exec | Tee`. Ejecuta como máximo cuatro Codex a
+  la vez y asigna archivos distintos a cada uno.
+- **Gemini.** Claude abre una ventana PowerShell normal con `-NoExit` y
+  ejecuta `scripts/run-gemini.ps1 -Script tool|research -Tarea <tarea>` con
+  los argumentos del encargo. `tool` usa `ask-gemini-tool.ps1` y `research`
+  usa `ask-gemini.ps1`. El lanzador carga `GEMINI_API_KEY` desde el entorno de
+  usuario para esa sesión y escribe `gemini.<tarea>.exit` al terminar. La
+  clave queda fuera del sandbox de Codex.
+
 ## Reglas de colaboración
 
 1. **El usuario supervisa** y tiene la última palabra en prioridades y
@@ -54,8 +71,8 @@ de que las conversaciones de las CLI se comuniquen entre sí:
 
 1. Claude encarga a Gemini una pregunta concreta, contexto, alcance y el
    resultado que necesita. Claude no hace investigación a fondo por su cuenta:
-   toda investigación en internet se delega a Gemini. Vía preferida:
-   `.\scripts\ask-gemini.ps1 -Tema <tema> -Pregunta "..." -Contexto "..."`,
+   Gemini es el investigador principal. Vía preferida:
+   `.\scripts\run-gemini.ps1 -Script research -Tarea <tarea> -Tema <tema> -Pregunta "..." -Contexto "..."`,
    que ejecuta Gemini en modo solo lectura (`--approval-mode plan`) y guarda
    su respuesta como informe. También puede encargarse desde la terminal de
    Gemini con la plantilla de abajo.
@@ -72,9 +89,16 @@ Los informes separan hechos respaldados por fuentes, análisis y recomendación.
 Gemini no modifica el brief ni el registro de decisiones como parte de una
 investigación; cualquier propuesta sigue pendiente de revisión y aprobación.
 
+### Respaldo de investigación
+
+Si `scripts/ask-gemini.ps1` falla por falta de clave API, 429
+(`RESOURCE_EXHAUSTED`), 503 u otro error, Claude delega el mismo encargo en
+`investigador` (Claude Haiku). El subagente entrega un informe en
+`docs/research/<tema>.md` con la misma plantilla.
+
 ### Fichas de herramientas con Gemini
 
-`.\scripts\ask-gemini-tool.ps1 -Programa nmap -Enfoque "reconocimiento de red y servicios en CTF" -AyudaCmd "nmap --help"`
+`.\scripts\run-gemini.ps1 -Script tool -Tarea ficha-nmap -Programa nmap -Enfoque "reconocimiento de red y servicios en CTF" -AyudaCmd "nmap --help"`
 
 El script requiere Gemini CLI autenticado en la sesión y le envía el encargo
 por stdin en modo `plan`. Gemini consulta documentación oficial y manuales.

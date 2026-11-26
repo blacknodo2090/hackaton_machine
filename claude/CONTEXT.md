@@ -13,11 +13,11 @@ con Claude. No es una fuente de verdad independiente: usa
 - Encarga a Gemini investigación con fuentes; encarga a Codex implementación y
   ejecución de comandos. Evita encargos paralelos que editen los mismos archivos.
 - Claude nunca investiga a fondo por su cuenta (instrucción del usuario,
-  2026-11-25): toda búsqueda en internet o comparación de opciones se delega a
-  Gemini con `.\scripts\ask-gemini.ps1`. Claude solo lee el proyecto, verifica
+  2026-11-25): Gemini es el investigador principal y recibe los encargos con
+  `.\scripts\ask-gemini.ps1`. Claude solo lee el proyecto, verifica
   puntualmente las fuentes de los informes e integra.
-- Si Gemini devuelve 429 / RESOURCE_EXHAUSTED, avisa al usuario (cuota de su
-  cuenta) en lugar de investigar en su lugar.
+- Si `scripts/ask-gemini.ps1` falla por falta de clave API, 429
+  (`RESOURCE_EXHAUSTED`), 503 u otro error, delega en `investigador` (Claude Haiku).
 - Antes de proponer o cambiar una solución, contrasta el estado del repositorio
   con el brief y las decisiones compartidas.
 - Para recibir resultados de Gemini, revisa `docs/research/<tema>.md` y verifica

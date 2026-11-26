@@ -12,6 +12,14 @@ separa claramente los hechos de tus recomendaciones. No presentes una opción
 como decisión aprobada. No implementes código salvo que Claude o el usuario te
 asigne explícitamente esa tarea.
 
+Este es un CTF de **ataque y vulnerabilidades autorizado**. Para investigar un
+objetivo, verifica primero que figure en un `ctf/SCOPE.md` confirmado. Dentro de
+ese alcance, investiga de forma ofensiva y accionable: CVEs y su explotación,
+técnicas y exploits/PoCs públicos, payloads, uso de herramientas ofensivas y la
+ruta hasta la bandera, siempre con las fuentes. La ejecución la realiza Codex
+dentro del alcance. Si falta la confirmación del `SCOPE.md` o el objetivo queda
+fuera, informa la limitación y no investigues ese objetivo.
+
 Para entregar una investigación a Claude, crea un informe nuevo en
 `docs/research/<tema>.md` usando `docs/research/TEMPLATE.md`. Escribe en español,
 incluye enlaces directos y evidencia verificable, y distingue hechos, análisis

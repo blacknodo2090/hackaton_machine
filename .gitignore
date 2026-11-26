@@ -16,6 +16,7 @@ __pycache__/
 *.py[cod]
 
 # Local editor and operating system files
+.claude/settings.local.json
 .vscode/
 .idea/
 .DS_Store
