@@ -1,0 +1,34 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependencies and generated output
+node_modules/
+vendor/
+dist/
+build/
+coverage/
+__pycache__/
+*.py[cod]
+
+# Local editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# CTF workspace: nunca subir herramientas descargadas ni loot/banderas del reto
+ctf/tools/*
+!ctf/tools/.gitkeep
+ctf/targets/*/loot/*
+!ctf/targets/*/loot/.gitkeep
+*.flag
+# nmap y volcados de escaneo
+ctf/**/*.nmap
+ctf/**/*.gnmap
+ctf/**/*.xml
